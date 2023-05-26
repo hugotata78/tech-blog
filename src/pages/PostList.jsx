@@ -1,11 +1,11 @@
 import React, {useEffect, useState } from 'react'
 import axios from 'axios'
-
+const base_url = import.meta.env.VITE_API_URL
 export const PostList = () => {
 
     const [posts,setPosts] = useState()
   const getPost = ()=>{
-    return axios.get('http://127.0.0.1:8000/posts/')
+    return axios.get(`${base_url}/posts/`)
   }
 
   useEffect(()=>{
