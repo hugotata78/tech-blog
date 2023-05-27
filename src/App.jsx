@@ -5,7 +5,6 @@ import viteLogo from '/vite.svg'
 import './App.css'
 import { ContainerPostList } from './pages/ContainerPostList'
 import { PostDetail } from './pages/PostDetail'
-import { DataProvider } from './context/DataProvider'
 import { Provider } from 'react-redux'
 import { store } from './redux/store'
 

@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from 'react'
+import React, { useEffect } from 'react'
 import { useParams, Link } from 'react-router-dom'
 import { useDispatch,useSelector } from 'react-redux'
 import { getPost } from '../redux/actions/postsActions'
