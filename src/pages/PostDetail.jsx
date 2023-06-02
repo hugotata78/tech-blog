@@ -15,6 +15,7 @@ export const PostDetail = () => {
     return (
         <div>
             <h3>{post && post.title}</h3>
+            <h5>Iniciado por: {post.owner}</h5>
             <p>{post && post.body}</p>
             <h4>Categorias relacionadas</h4>
             <ul>
