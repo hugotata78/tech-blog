@@ -1,8 +1,8 @@
 import { CATEGORIES, CATEGORY } from "../actions/categoryAction";
 
 const initialState = {
-    categories : [],
-    category: {}
+    all_categories : [],
+    category : {},
 }
 
 const categoryReducers = (state=initialState, action)=>{
@@ -10,12 +10,12 @@ const categoryReducers = (state=initialState, action)=>{
         case CATEGORIES:
             return{
                 ...state,
-                categories:action.payload,
+                all_categories: action.payload,
             }
         case CATEGORY:
             return{
                 ...state,
-                category:action.payload
+                category:action.payload,
             }
         default:
             return state

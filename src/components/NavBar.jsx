@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import jwt from 'jwt-decode'
 import { useDispatch, useSelector } from 'react-redux'
-import { getCategories } from '../redux/actions/categoryAction'
+import { getCategories, getCategory } from '../redux/actions/categoryAction'
 
 
 
@@ -13,7 +13,7 @@ export const NavBar = () => {
     const [token, setToken] = useState(null)
     const navigate = useNavigate()
     const dispatch = useDispatch()
-    const categories = useSelector(state=>state.categoryReducers.categories)
+    const categories = useSelector(state=>state.categoryReducers.all_categories)
 
     
 
@@ -35,7 +35,7 @@ export const NavBar = () => {
             <Link className='font-bold text-3-xl mb-4' to='/'><h1>Inicio</h1></Link>
             {
                 categories && categories.map(category =>(
-                    <Link>{category.name}</Link>
+                    <Link to={`/category/${category.id}`} key={category.id}>{category.name}</Link>
                 ))
             }
             {

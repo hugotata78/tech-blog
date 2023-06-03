@@ -13,7 +13,7 @@ export const getCategories = ()=>{
             const results = await base_url.get('/categories/')
             dispatch({
                 type:CATEGORIES,
-                action: results.data
+                payload: results.data
             })
         } catch (error) {
             
