@@ -1,8 +1,9 @@
-import { GET_POST, GET_ALL_POSTS} from '../actions/postsActions'
+import {CREATE_COMMENT, GET_POST, GET_ALL_POSTS} from '../actions/postsActions'
 
 const initialState = {
     all_posts : [],
-    post: {}
+    post: {},
+    comment: {}
 }
 
 const postReducer = (state=initialState,action) =>{
@@ -16,6 +17,11 @@ const postReducer = (state=initialState,action) =>{
             return{
                 ...state,
                 post:action.payload
+            }
+        case CREATE_COMMENT:
+            return{
+                ...state,
+                comment:action.payload
             }
         default:
             return state

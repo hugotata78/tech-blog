@@ -7,6 +7,7 @@ const base_url = axios.create({
 
 export const GET_ALL_POSTS = 'GET_ALL_POSTS'
 export const GET_POST = 'GET_POST'
+export const CREATE_COMMENT = 'CREATE_COMMENT'
 
 
 export const getAllPosts = ()=>{
@@ -26,9 +27,28 @@ export const getAllPosts = ()=>{
 export const getPost = (id)=>{
     return async (dispatch)=>{
         try {
-            const results = await base_url.get(`/posts/${id}`)
+            const results = await base_url.get(`/posts/${id}/`)
             dispatch({
                 type:GET_POST,
+                payload:results.data
+            })
+        } catch (error) {
+            
+        }
+    }
+}
+
+export const createComment = (id, data, token)=>{
+    console.log(token)
+    return async(dispatch)=>{
+        try {
+            const results = await base_url.post(`/posts/${id}/comment/`, data,{
+                headers: {
+                    'Authorization': `JWT ${token}` 
+                }
+              })
+            dispatch({
+                type:CREATE_COMMENT,
                 payload:results.data
             })
         } catch (error) {
