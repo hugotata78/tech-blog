@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import jwt from 'jwt-decode'
 import { useDispatch, useSelector } from 'react-redux'
 import { getCategories, getCategory } from '../redux/actions/categoryAction'
+import { userLogout } from '../redux/actions/userActions'
 
 
 
@@ -18,14 +19,15 @@ export const NavBar = () => {
     
 
     const logoutAction = () => {
-        localStorage.removeItem('login')
+        const data = JSON.parse(localStorage.getItem('login'))
+        dispatch(userLogout(data.refresh))
         navigate('/')
     }
 
     useEffect(() => {
         const results = JSON.parse(localStorage.getItem('login'))
         results ? setToken(jwt(results.access)) : setToken(null)
-    }, [])
+    },[])
 
     useEffect(()=>{
         dispatch(getCategories())

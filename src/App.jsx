@@ -7,6 +7,7 @@ import { Provider } from 'react-redux'
 import { store } from './redux/store'
 import { NavBar } from './components/NavBar'
 import { LoginForm } from './components/LoginForm'
+import { CategoryDetail } from './pages/CategoryDetail'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -21,6 +22,7 @@ function App() {
             <Route path='/' element={<ContainerPostList />} />
             <Route path='/posts/:id' element={<PostDetail />} />
             <Route path='/login' element={<LoginForm />} />
+            <Route path='/category/:id' element={<CategoryDetail />} />
           </Routes>
         </div>
       </BrowserRouter>
