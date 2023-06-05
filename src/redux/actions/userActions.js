@@ -25,13 +25,12 @@ export const userLogin = (data) => {
 }
 
 export const userLogout = (token) => {
-    console.log(token)
     return async (dispatch) => {
-        const results = await base_url.post('/users/auth/logout/', {'refresh': token})
-localStorage.removeItem('login')
-dispatch({
-    type: LOGOUT,
-    payload: results.data
-})
+        const results = await base_url.post('/users/auth/logout/', { 'refresh': token })
+        localStorage.removeItem('login')
+        dispatch({
+            type: LOGOUT,
+            payload: results.data
+        })
     }
 }
