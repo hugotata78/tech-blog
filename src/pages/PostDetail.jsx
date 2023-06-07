@@ -4,21 +4,31 @@ import { useDispatch, useSelector } from 'react-redux'
 import { createComment, getPost } from '../redux/actions/postsActions'
 import jwtDecode from 'jwt-decode'
 import { useForm } from 'react-hook-form'
+import { updateCommentAction } from '../redux/actions/commentAction'
 
 export const PostDetail = () => {
     const { id } = useParams()
     const dispatch = useDispatch()
     const post = useSelector(state => state.postReducer.post)
     const [token, setToken] = useState(null)
+    const [dataToken, setDataToken] = useState(null)
+    const [idComment, setIdComment] = useState(null)
+
     const { register, handleSubmit, formState: {
         errors
-    } } = useForm()
+    }, setValue } = useForm()
 
-    const newComment = handleSubmit(data=>{
-        if (token) {
+    const getData = (e, id, value)=>{
+        e.preventDefault()
+        setIdComment(id)
+        setValue('comment', value)
+
+    }
+    const newComment = handleSubmit(data => {
+        if (!idComment) {
             dispatch(createComment(id, data, token))
-        }else{
-            console.log('No hay token')
+        } else {
+            dispatch(updateCommentAction(idComment,data,token))
         }
     })
     useEffect(() => {
@@ -27,7 +37,11 @@ export const PostDetail = () => {
 
     useEffect(() => {
         const data = JSON.parse(localStorage.getItem('login'))
-        if (data) setToken(data.access)
+        if (data) {
+            setToken(data.access)
+            setDataToken(jwtDecode(data.access))
+            
+        }
     }, [])
     return (
         <div>
@@ -44,19 +58,26 @@ export const PostDetail = () => {
             <h4>Comentarios</h4>
             <ul>
                 {post.comments && post.comments.map(comment => (
-                    <li key={comment.id}>{comment.comment}</li>
+                    <div key={comment.id}>
+                        <p>{comment.comment}</p>
+                        {dataToken && dataToken.username === comment.owner && <button onClick={e=>getData(e,comment.id, comment.comment)}>Editar comentario</button>}
+                        {dataToken && dataToken.username === comment.owner && <button>Borrar comentario</button>}
+                    </div>
+
                 ))
                 }
             </ul>
-            <form action="" onSubmit={newComment}>
-                <textarea
-                    cols="30"
-                    rows="10"
-                    {...register('comment', {required:true})}
-                >
-                </textarea>
-                <input type="submit" value="Enviar" />
-            </form>
+            {
+                dataToken && <form action="" onSubmit={newComment}>
+                    <textarea
+                        cols="30"
+                        rows="10"
+                        {...register('comment', { required: true })}
+                    >
+                    </textarea>
+                    <input type="submit" value="Enviar" />
+                </form>
+            }
             <Link to='/'>Volver</Link>
         </div>
     )
