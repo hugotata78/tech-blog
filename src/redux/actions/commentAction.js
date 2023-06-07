@@ -12,7 +12,7 @@ export const updateCommentAction = (id,data,token)=>{
         try {
             const results = await base_url.put(`/comments/${id}`, data,{
                 headers: {
-                    'Authorization': `Bearer ${token}` 
+                    'Authorization': `JWT ${token}` 
                 }
               })
             dispatch({

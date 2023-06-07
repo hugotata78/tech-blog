@@ -60,8 +60,8 @@ export const PostDetail = () => {
                 {post.comments && post.comments.map(comment => (
                     <div key={comment.id}>
                         <p>{comment.comment}</p>
-                        {dataToken && dataToken.username === comment.owner && <button onClick={e=>getData(e,comment.id, comment.comment)}>Editar comentario</button>}
-                        {dataToken && dataToken.username === comment.owner && <button>Borrar comentario</button>}
+                        {dataToken && dataToken.username === comment.owner && <button onClick={e=>getData(e,comment.id, comment.comment)} class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded m-1">Editar comentario</button>}
+                        {dataToken && dataToken.username === comment.owner && <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded m-1">Borrar comentario</button>}
                     </div>
 
                 ))
@@ -75,7 +75,7 @@ export const PostDetail = () => {
                         {...register('comment', { required: true })}
                     >
                     </textarea>
-                    <input type="submit" value="Enviar" />
+                    <input class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded m-1" type="submit" value="Enviar" />
                 </form>
             }
             <Link to='/'>Volver</Link>
